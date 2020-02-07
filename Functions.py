@@ -3,8 +3,6 @@ import os
 
 def splitcsv():
     # Initialize variables
-    file_list = []
-    counter = 0
     file_choice = 0
     line_number_choice = 0
     line_count = 0
@@ -12,6 +10,8 @@ def splitcsv():
 
     # List all CSV files in the current folder
     while True:
+        file_list = []
+        counter = 0
         for files in os.listdir("./"):
             if files.endswith('.csv'):
                 file_list.append(files)
@@ -26,13 +26,19 @@ def splitcsv():
             print("No CSV files found in current directory\nPress Enter to retry")
             print("-----------------------------------------")
             input()
+            continue
         else:
             print("-----------------------------------------")
 
         # Get input from the user to select a file
         print("\nEnter the file number to split: ", end="")
-        file_choice = int(input())
-        print("You chose file:", file_list[file_choice - 1])
+        try:
+            file_choice = int(input())
+            print("You chose file:", file_list[file_choice - 1])
+        except:
+            print("ERROR: daaaaaaaaaaaaaaa")
+        else:
+            break
 
     # Get input from the user to choose how many lines per file before splitting
     print("\nHow many lines in each output file before splitting: ", end="")
