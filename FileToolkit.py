@@ -1,6 +1,7 @@
 #Import modules
-import csv
-import os
+import Functions
 
-d
+run = "y"
 
+while run == "y":
+        Functions.splitcsv()
