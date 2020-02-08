@@ -10,6 +10,7 @@ def splitcsv():
 
     # List all CSV files in the current folder
     while True:
+        #print("topppppp\n\n")
         file_list = []
         counter = 0
         for files in os.listdir("./"):
@@ -36,7 +37,7 @@ def splitcsv():
             file_choice = int(input())
             print("You chose file:", file_list[file_choice - 1])
         except:
-            print("ERROR: daaaaaaaaaaaaaaa")
+            print("ERROR: Please enter a number between 1 and " + str(counter) + "\n\n\n")
         else:
             break
 
