@@ -1,6 +1,7 @@
 #Import modules
-import Functions
 import os
+from lib import Functions
+#exec(open('./lib/Functions.py').read())
 
 run = "y"
 
