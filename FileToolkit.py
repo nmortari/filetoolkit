@@ -11,6 +11,7 @@ while run == "y":
                 os.system("clear")
 
         Functions.splitcsv()
+        print("hiiiiii")
 
         print("\n\n\nEnd of program. Would you like to run another task?")
         print("(Y/N) ", end="")
