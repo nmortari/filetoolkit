@@ -10,7 +10,6 @@ def splitcsv():
 
     # List all CSV files in the current folder
     while True:
-        #print("topppppp\n\n")
         file_list = []
         counter = 0
         for files in os.listdir("./"):
