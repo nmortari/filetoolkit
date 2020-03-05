@@ -12,6 +12,7 @@ def splitcsv():
     while True:
         file_list = []
         counter = 0
+        # Scan for a list of files in the current folder and add them to a list
         for files in os.listdir("./"):
             if files.endswith('.csv'):
                 file_list.append(files)
@@ -22,6 +23,7 @@ def splitcsv():
             counter = counter + 1
             print(counter, " - ", file)
 
+        # If no files were found retry after the user presses enter
         if counter == 0:
             print("No CSV files found in current directory\nPress Enter to retry")
             print("-----------------------------------------")
@@ -60,31 +62,35 @@ def splitcsv():
     print("You have entered", OutputFileName, "as your output file name")
 
     # Open the file the user picked from the list
-    with open('%s' % file_list[file_choice - 1], 'r') as csvimport:
-        all_rows = csv.reader(csvimport, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONE)
-        # Skip the first line (header information)
-        next(csvimport)
+    try:
+        with open('%s' % file_list[file_choice - 1], 'r') as csvimport:
+            all_rows = csv.reader(csvimport, delimiter=',', quotechar='"', quoting=csv.QUOTE_NONE)
 
-        for row in all_rows:
-            # If the max number of lines have been reached, create a new file
-            if line_count == 0:
-                if (output_file_number < 10):
-                    OutputFile = open(OutputFileName + '-0' + str(output_file_number) + '.csv', 'w')
-                else:
-                    OutputFile = open(OutputFileName + '-' + str(output_file_number) + '.csv', 'w')
-                output_file_number = output_file_number + 1
+            # Skip the first line (header information)
+            next(csvimport)
 
-            line_count = line_count + 1
-            OutputFile.write(','.join(row) + '\n')
-            # If the max number of lines have been reached, close the file and reset the line count
-            if line_count == line_number_choice:
-                OutputFile.close()
-                line_count = 0
+            for row in all_rows:
+                # If the max number of lines have been reached, create a new file
+                if line_count == 0:
+                    if (output_file_number < 10):
+                        OutputFile = open(OutputFileName + '-0' + str(output_file_number) + '.csv', 'w')
+                    else:
+                        OutputFile = open(OutputFileName + '-' + str(output_file_number) + '.csv', 'w')
+                    output_file_number = output_file_number + 1
 
-    # Get the current directory
-    Directory = os.getcwd()
+                line_count = line_count + 1
+                OutputFile.write(','.join(row) + '\n')
+                # If the max number of lines have been reached, close the file and reset the line count
+                if line_count == line_number_choice:
+                    OutputFile.close()
+                    line_count = 0
+    except:
+        print("I/O file error")
+    else:
+        # Get the current directory
+        Directory = os.getcwd()
 
-    # Display the final result to the user
-    print("\n\n-----------------------------------------")
-    print("Splitting Complete\nYour CSV file has been split into " + str(output_file_number - 1) + " Files")
-    print("Your files have been saved in: " + Directory)
+        # Display the final result to the user
+        print("\n\n-----------------------------------------")
+        print("Splitting Complete\nYour CSV file has been split into " + str(output_file_number - 1) + " Files")
+        print("Your files have been saved in: " + Directory)
